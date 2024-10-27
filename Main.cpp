@@ -1,47 +1,49 @@
-//The main prg to run if you want to run the Calcultor
+//MiniProject OOPS
+//Scientific Calculator (Main Program)
+//Name : Aryan Bandodkar RollNo:23CO01
 #include <iostream>
-#include <sstream>
-#include <stack>
-#include <string>
-#include <cctype>
-#include <cmath>
-#include <stdexcept>
+#include<conio.h>
 #include "Calculator.h"
+#include "SciCalc.h"
 using namespace std;
 
-int main()
+int main() 
 {
-    Calculator calc;
-    string expression;
-    char option;
-
-    while (1)
+    int choice;
+    do
+    {
+        cout<<"\n--- Calculator Application ---\n";
+        cout<<"1. Normal Calculator\n";
+        cout<<"2. Scientific Calculator\n";
+        cout<<"0. Exit\n";
+        cout<<"Enter your choice: ";
+        cin>>choice;
+        system("cls");
+        switch (choice) 
         {
-        cout << "Enter an expression (or type 'exit' to quit)(to use Memory in the expression use 'M')(dont add spaces): "<<endl;
-        cin >> expression;
+            case 1:
+                {
+                    Calc c;
+                    c.normalCalculatorMenu();
+                    break;
+                }
 
-        if (expression == "exit")
-            break;
+            case 2:
+                {
+                    SciCalculator s;
+                    s.scientificCalculatorMenu();
+                    break;
+                }
 
-        try {
-            double result = calc.evaluateExpression(expression);
-            cout<<"Result: "<<result<<endl;
+            case 0:
+                cout<<"\tThanks For Using The Calculator.\n";
+                break;
 
-            cout<<"Do you want to save the result to memory? (y/n): ";
-            cin >> option;
-
-            if (option == 'y' || option == 'Y') {
-                calc.saveToMemory();
-                cout <<"Result saved to memory."<<endl;
-            }
-
-            cout<<"Memory value: "<<calc.getMemory()<<endl;
+            default:
+                cout<<"\tInvalid choice, Please select again." <<endl;
         }
-        catch (const std::runtime_error& e)
-         {
-            cerr << "Error: " << e.what() <<endl;
-        }
-    }
+    }while(choice!=0);
 
     return 0;
 }
+
